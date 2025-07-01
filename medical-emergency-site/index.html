@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency Care Locator - Find Nearest Equipped Hospital</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-heartbeat"></i>
+                <h1>Emergency Care Locator</h1>
+            </div>
+            <p class="tagline">Fast. Reliable. Life-saving.</p>
+        </header>
+
+        <!-- Emergency Alert -->
+        <div class="emergency-alert">
+            <i class="fas fa-exclamation-triangle"></i>
+            <span>If this is a life-threatening emergency, call 911 immediately</span>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Step 1: Phone Number -->
+            <div id="step1" class="step active">
+                <div class="step-header">
+                    <h2><i class="fas fa-phone"></i> Step 1: Contact Information</h2>
+                    <p>Enter your phone number to enable location tracking and emergency coordination</p>
+                </div>
+                <form id="phoneForm" class="form">
+                    <div class="input-group">
+                        <label for="phone">Phone Number*</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+1 (555) 123-4567" required>
+                        <span class="help-text">We'll use this to coordinate with emergency services</span>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-arrow-right"></i>
+                        Continue
+                    </button>
+                </form>
+            </div>
+
+            <!-- Step 2: Location & Emergency Details -->
+            <div id="step2" class="step">
+                <div class="step-header">
+                    <h2><i class="fas fa-map-marker-alt"></i> Step 2: Emergency Details</h2>
+                    <p>Provide emergency information to find the best equipped hospital</p>
+                </div>
+                <form id="emergencyForm" class="form">
+                    <div class="input-group">
+                        <label for="name">Patient Name*</label>
+                        <input type="text" id="name" name="name" placeholder="Full name" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="location">Current Location</label>
+                        <input type="text" id="location" name="location" placeholder="Address or landmark" readonly>
+                        <button type="button" id="getLocation" class="btn btn-secondary">
+                            <i class="fas fa-crosshairs"></i>
+                            Get My Location
+                        </button>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="emergency-type">Type of Emergency*</label>
+                        <select id="emergency-type" name="emergency-type" required>
+                            <option value="">Select emergency type</option>
+                            <option value="cardiac">Cardiac Emergency</option>
+                            <option value="trauma">Trauma/Injury</option>
+                            <option value="stroke">Stroke</option>
+                            <option value="respiratory">Breathing Problems</option>
+                            <option value="neurological">Neurological Emergency</option>
+                            <option value="poisoning">Poisoning</option>
+                            <option value="burns">Burns</option>
+                            <option value="childbirth">Childbirth Emergency</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="description">Emergency Description*</label>
+                        <textarea id="description" name="description" rows="4" placeholder="Describe the emergency situation, symptoms, or injuries..." required></textarea>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="severity">Severity Level*</label>
+                        <select id="severity" name="severity" required>
+                            <option value="">Select severity</option>
+                            <option value="critical">Critical - Life threatening</option>
+                            <option value="urgent">Urgent - Needs immediate care</option>
+                            <option value="moderate">Moderate - Serious but stable</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-ambulance"></i>
+                        Find Hospital & Request Ambulance
+                    </button>
+                </form>
+            </div>
+
+            <!-- Step 3: Results -->
+            <div id="step3" class="step">
+                <div class="step-header">
+                    <h2><i class="fas fa-hospital"></i> Emergency Response Activated</h2>
+                </div>
+                
+                <div class="status-updates">
+                    <div class="status-item completed">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Emergency request submitted</span>
+                    </div>
+                    <div class="status-item completed">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Location tracked</span>
+                    </div>
+                    <div class="status-item processing">
+                        <i class="fas fa-ambulance"></i>
+                        <span>Ambulance dispatched</span>
+                    </div>
+                    <div class="status-item pending">
+                        <i class="fas fa-hospital"></i>
+                        <span>Hospital prepared</span>
+                    </div>
+                </div>
+
+                <div id="hospitalResults" class="hospital-results">
+                    <!-- Hospital information will be populated here -->
+                </div>
+
+                <div class="emergency-contacts">
+                    <h3>Emergency Contacts</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>Ambulance Dispatch: <strong id="ambulanceContact">+1-555-AMBULANCE</strong></span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-hospital"></i>
+                        <span>Hospital Direct: <strong id="hospitalContact">+1-555-HOSPITAL</strong></span>
+                    </div>
+                </div>
+
+                <button id="newEmergency" class="btn btn-secondary">
+                    <i class="fas fa-plus"></i>
+                    Report New Emergency
+                </button>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2024 Emergency Care Locator. Saving lives through technology.</p>
+            <p class="disclaimer">This service complements but does not replace emergency services. Always call 911 for immediate life-threatening emergencies.</p>
+        </footer>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="loading-spinner">
+            <i class="fas fa-heartbeat"></i>
+            <p>Finding nearest equipped hospital...</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
